@@ -8,7 +8,12 @@ const displayMessage = message => document.querySelector('.message').textContent
 const displayTemperature = temperature => document.querySelector('.temperature').textContent = temperature;
 const changeBodyBackgroundColor = color => document.querySelector('body').style.backgroundColor = color;
 
-const handleCheck = () => {
+const handleCheck = (e) => {
+  if (e.type === 'keypress')
+    if (!(e.which === 13))
+      return;
+  
+
   const guess = Number(document.querySelector('.guess').value);
 
   if (guess > 50 || guess < 1){
@@ -56,6 +61,7 @@ const handleCheck = () => {
 };
 
 const gameOver = () => {
+  document.querySelector('.guess').removeEventListener('keypress', handleCheck);
   btnCheck.removeEventListener('click', handleCheck);
   btnCheck.style.cursor = 'not-allowed';
   btnCheck.style.opacity = '0.2';
@@ -73,6 +79,7 @@ const repeat = () => {
   secretNumber = Math.trunc(Math.random()*50) + 1;
 
   btnCheck.addEventListener('click', handleCheck);
+  document.querySelector('.guess').addEventListener('keypress', handleCheck);
   
   displayMessage('Comece a advinhar');
   displayTemperature('');
@@ -89,4 +96,5 @@ const repeat = () => {
 
 
 btnCheck.addEventListener('click', handleCheck);
+document.querySelector('.guess').addEventListener('keypress', handleCheck);
 document.querySelector('.again').addEventListener('click', repeat);
