@@ -6,3 +6,5 @@ Para iniciar, basta inserir um número entre 1 e 50 no input e pressionar o bot�
 - "Quente", caso o número esteja em até 10 unidades de distância.
 - "Muito quente", caso o número esteja em até 5 unidades de distância.
 - "Tá pegando fogo, bicho!", caso o número esteja em até 2 unidades de distância.
+
+![Guess My Number - Gameplay](Guess My Number - gameplay.mp4)
