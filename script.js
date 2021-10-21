@@ -81,14 +81,14 @@ const repeat = () => {
   btnCheck.addEventListener('click', handleCheck);
   document.querySelector('.guess').addEventListener('keypress', handleCheck);
   
-  displayMessage('Comece a advinhar');
+  displayMessage('Comece a advinhar...');
   displayTemperature('');
   changeBodyBackgroundColor('#222');
   btnCheck.style.cursor = 'pointer';
   btnCheck.style.opacity = '1';
   document.querySelector('.guess').removeAttribute('readonly');
   document.querySelector('.guess').value = '';
-  document.querySelector('.score').textContent = 50;
+  document.querySelector('.score').textContent = 10;
   document.querySelector('.number').textContent = '?';
   document.querySelector('.number').style.width = '15rem';
 };
