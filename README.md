@@ -7,4 +7,5 @@ Para iniciar, basta inserir um número entre 1 e 50 no input e pressionar o bot�
 - "Muito quente", caso o número esteja em até 5 unidades de distância.
 - "Tá pegando fogo, bicho!", caso o número esteja em até 2 unidades de distância.
 
+### Gameplay
 https://youtu.be/ACjiRg52_6Y
