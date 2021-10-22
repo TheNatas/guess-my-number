@@ -82,6 +82,16 @@ h1 {
   left: 2rem;
 }
 
+.left>span {
+  font-size: 2rem;
+}
+
+.tries {
+  margin: 1rem;
+  font-size: 2rem;
+  height: 3rem;
+}
+
 .guess {
   background: none;
   border: 4px solid #eee;

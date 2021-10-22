@@ -1,18 +1,19 @@
 let secretNumber = Math.trunc(Math.random()*50) + 1;
 let score = 10;
 let highscore = 0;
+let tries = [];
 
 const btnCheck = document.querySelector('.check');
 
 const displayMessage = message => document.querySelector('.message').textContent = message;
 const displayTemperature = temperature => document.querySelector('.temperature').textContent = temperature;
+const updateAndDisplayTries = newTry => {tries.push(newTry); document.querySelector('.tries').textContent = [...tries]};
 const changeBodyBackgroundColor = color => document.querySelector('body').style.backgroundColor = color;
 
 const handleCheck = (e) => {
   if (e.type === 'keypress')
     if (!(e.which === 13))
       return;
-  
 
   const guess = Number(document.querySelector('.guess').value);
 
@@ -32,29 +33,34 @@ const handleCheck = (e) => {
   }
 
   else if (guess !== secretNumber){
-    if (Math.abs(guess - secretNumber) <= 2){
-      changeBodyBackgroundColor('red');
-      displayTemperature(`Tá pegango fogo, bicho!`);
-    }
-    else if (Math.abs(guess - secretNumber) <= 5){
-      changeBodyBackgroundColor('darkorange');
-      displayTemperature('Muito quente');
-    }
-    else if (Math.abs(guess - secretNumber) <= 10){
-      changeBodyBackgroundColor('orange');
-      displayTemperature('Quente');
-    }
-    else{
-      changeBodyBackgroundColor('#222');
-    }
-
     if (score > 1){
+
       displayMessage(`Muito ${guess > secretNumber ? 'alto' : 'baixo'}`);
       score--;
       document.querySelector('.score').textContent = score;
+      
+      updateAndDisplayTries(guess);
+      document.querySelector('.guess').value = '';
+
+      if (Math.abs(guess - secretNumber) <= 2){
+        changeBodyBackgroundColor('red');
+        displayTemperature(`Tá pegango fogo, bicho!`);
+      }
+      else if (Math.abs(guess - secretNumber) <= 5){
+        changeBodyBackgroundColor('darkorange');
+        displayTemperature('Muito quente');
+      }
+      else if (Math.abs(guess - secretNumber) <= 10){
+        changeBodyBackgroundColor('orange');
+        displayTemperature('Quente');
+      }
+      else{
+        changeBodyBackgroundColor('#222');
+        displayTemperature('');
+      }
+
     }else{
       gameOver();
-      document.querySelector('.score').textContent = 0;
     }
   }
 
@@ -71,12 +77,14 @@ const gameOver = () => {
   changeBodyBackgroundColor(score > 1 ? '#60b347' : '');
 
   document.querySelector('.number').textContent = score > 1 ? secretNumber : ':(';
+  document.querySelector('.score').textContent = score > 1 ? score : 0;
   document.querySelector('.guess').readOnly = 'readonly';
 };
 
 const repeat = () => {
   score = 10;
   secretNumber = Math.trunc(Math.random()*50) + 1;
+  tries = tries.filter(() => false);
 
   btnCheck.addEventListener('click', handleCheck);
   document.querySelector('.guess').addEventListener('keypress', handleCheck);
@@ -86,6 +94,7 @@ const repeat = () => {
   changeBodyBackgroundColor('#222');
   btnCheck.style.cursor = 'pointer';
   btnCheck.style.opacity = '1';
+  document.querySelector('.tries').textContent = '';
   document.querySelector('.guess').removeAttribute('readonly');
   document.querySelector('.guess').value = '';
   document.querySelector('.score').textContent = 10;
