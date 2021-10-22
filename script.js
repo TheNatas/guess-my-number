@@ -11,15 +11,25 @@ const updateAndDisplayTries = newTry => {tries.push(newTry); document.querySelec
 const changeBodyBackgroundColor = color => document.querySelector('body').style.backgroundColor = color;
 
 const handleCheck = (e) => {
-  if (e.type === 'keypress')
-    if (!(e.which === 13))
+  if (e.type === 'keypress'){
+    if (!(e.which === 13)){
       return;
+    }
+  }
 
   const guess = Number(document.querySelector('.guess').value);
+
+  if (tries.find(num => num === guess)){
+    displayMessage('Você já tentou esse...');
+    displayTemperature('');
+    changeBodyBackgroundColor('');
+    return;
+  }
 
   if (guess > 50 || guess < 1){
     document.querySelector('.guess').value = '';
     displayMessage('Precisa de um manual?');
+    return
   }
 
   else if (guess === secretNumber){
